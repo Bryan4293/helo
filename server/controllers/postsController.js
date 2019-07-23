@@ -1,6 +1,6 @@
 module.exports = {
     getAll: async function(req, res) {
-       const {id} = req.session.user;
+       const {helopost_id} = req.session.user;
        const {displayOwnBool} = req.params;
        const {search} = req.query;
  
@@ -9,9 +9,9 @@ module.exports = {
        const db = req.app.get('db');
  
        if (displayOwnBool === 'true') {
-          posts = await db.helopost.get_all_with_user();
+          posts = await db.helopost.get_all_user();
        } else {
-          posts = await db.helopost.get_all_without_user(id);
+          posts = await db.helopost.get_all_without_user(helopost_id);
        }
  
        if (search) {
